@@ -12,19 +12,20 @@ export default class extends Controller {
     }
 
     load() {
-        var gh = this.store.get('$page.gh');
-        var gists = new Gists(gh);
-        gists.get()
-            .then(()=> {
-                this.persist();
-                this.store.dispatch(
-                    loadData(gh)
-                );
-            })
-            .catch(e=> {
-                MsgBox.alert('Error occurred: ' + e);
-                console.log(e);
-            })
+        // don't need this gist load feature
+        // var gh = this.store.get('$page.gh');
+        // var gists = new Gists(gh);
+        // gists.get()
+        //     .then(()=> {
+        //         this.persist();
+        //         this.store.dispatch(
+        //             loadData(gh)
+        //         );
+        //     })
+        //     .catch(e=> {
+        //         MsgBox.alert('Error occurred: ' + e);
+        //         console.log(e);
+        //     })
     }
 
     create() {

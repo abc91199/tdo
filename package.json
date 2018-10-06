@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "exit 0",
-    "start": "webpack-dev-server --config config/webpack.dev.js --open",
+    "start": "webpack-dev-server --config config/webpack.dev.js --host=192.168.200.106",
     "build": "webpack --config config/webpack.prod.js",
     "build:extension": "webpack --config config/webpack.extension.js"
   },
@@ -25,15 +25,20 @@
   },
   "homepage": "https://github.com/mstijak/tdo#readme",
   "dependencies": {
+    "@feathersjs/client": "^3.7.3",
+    "babel-preset-env": "^1.7.0",
     "copy-webpack-plugin": "^4.1.1",
     "cx": "^17.10.6",
     "cx-react": "^17.10.0",
     "cx-redux": "^17.5.0",
+    "lodash": "^4.17.11",
+    "lodash.isequal": "^4.5.0",
     "marked": "^0.3.6",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "socket.io-client": "^2.1.1",
     "uid": "0.0.2"
   },
   "devDependencies": {

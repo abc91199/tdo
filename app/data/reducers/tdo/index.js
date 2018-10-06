@@ -9,7 +9,7 @@ import tasks from './tasks';
 
 import {
     REQUEST_TDO, RECEIVE_TDO,
-    LOAD_DEFAULT_TDO
+    LOAD_DEFAULT_TDO, INITIALIZE_TDO
 }
 from '../../actions';
 
@@ -34,6 +34,11 @@ export default function(state = {}, action) {
             return action.data;
 
         case LOAD_DEFAULT_TDO:
+            var data = getDefaultData();
+            // migrate(data);
+            return data;
+
+        case INITIALIZE_TDO:
             var data = getDefaultData();
             migrate(data);
             return data;

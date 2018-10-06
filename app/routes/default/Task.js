@@ -63,10 +63,16 @@ class TaskCmp extends VDOM.Component {
         </div>
     }
 
+    removeStyleKeywords(taskname) {
+        var newname = taskname.replace(/\B\#\w+/, "");
+        newname = newname.replace(/\B\!\w+/, "");
+        return newname;
+    }
+
     renderContent() {
         var {data, instance} = this.props;
         var {widget} = this.props.instance;
-        var html = data.task.name ? marked(data.task.name) : '<p>&nbsp;</p>';
+        var html = data.task.name ? marked(this.removeStyleKeywords(data.task.name)) : '<p>&nbsp;</p>';
 
         var styles = getStyles(data.task.name, data.styles);
         var className = widget.CSS.element('checkbox', "input", {

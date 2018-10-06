@@ -1,7 +1,9 @@
 import { Controller } from 'cx/ui';
 import { append } from 'cx/data';
 import uid from 'uid';
-import { loadData, addBoard, gotoBoard } from '../data/actions';
+import { loadData, updateData, addBoard, gotoBoard } from '../data/actions';
+import { getService, getSocket } from '../socket';
+
 
 export default class extends Controller {
     init() {
@@ -9,9 +11,47 @@ export default class extends Controller {
 
         this.store.set('layout.mode', this.getLayoutMode())
 
-        this.store.dispatch(
-            loadData()
-        );
+        // this.store.dispatch(
+        //     loadData()
+        // );
+
+        // setup to trigger loadData whenever data is updated
+        const socket = getSocket();
+        const service = getService();
+        socket.on('connect', connection => {
+            // // init
+            // this.store.dispatch(
+            //     updateData("init")
+            // );            
+            service.get('tdoStore').then(item => {
+                this.store.dispatch(
+                    updateData(item)
+                );
+            });
+        });
+
+        socket.on('disconnect', connection => {
+            console.log("disconnected");
+            this.store.dispatch(
+                updateData(null)
+            );            
+        });
+
+
+        const evts = ["created", "updated", "patched"];
+        for (var i=0; i<evts.length; i++) {
+            service.on(evts[i], tdodata => {
+                if (tdodata["_id"]=='tdoStore') {
+                    this.store.dispatch(
+                        updateData(tdodata)
+                    );
+                } else {
+                    this.store.dispatch(
+                        updateData(null)
+                    );
+                }
+            })
+        }
     }
 
     getLayoutMode() {

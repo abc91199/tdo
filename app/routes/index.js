@@ -60,7 +60,7 @@ const MenuItems = <cx>
             </a>
         </MenuItem>
 
-        <div class="spacer" visible:expr="{layout.mode}=='desktop'"/>
+        {/* <div class="spacer" visible:expr="{layout.mode}=='desktop'"/>
         <hr visible:expr="{layout.mode}!='desktop'"/>
 
         <MenuItem pad>
@@ -70,7 +70,7 @@ const MenuItems = <cx>
         <MenuItem pad>
             <a href={`http://twitter.com/home?status=${encodeURIComponent("tdo - hackable todo list #todo https://goo.gl/rhkuYP")}`}
                target="_blank">Tweet</a>
-        </MenuItem>
+        </MenuItem> */}
     </PureContainer>
 </cx>;
 
@@ -79,7 +79,7 @@ export default <cx>
         <style innerHtml:bind="tdo.settings.css"/>
         <Sandbox key:bind="hash" storage:bind="pages" immutable>
             <header class="cxe-layout-header">
-                <h1>tdo</h1>
+                <h1 style={{color: 'orange'}}>tdo</h1>
                 <TextField value:bind="search.query" placeholder="Search..." mod="search" id="search" autoFocus/>
 
                 <Menu horizontal>
